@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>student login</title>
+</head>
+<body>
+    <h1 align="justify">STUDENT LOGIN PAGE</h1>
+    <main>
+         <form onsubmit="return login(event)">
+    <input id="user" type="text" placeholder="Username">
+    <input id="pass" type="password" placeholder="password">
+    <button>SUBMIT</button>
+    </form>
+    <p id="result"></p>
+    </main>
+    <style>
+        h1{
+            text-decoration: rgb(182, 243, 243);
+        }
+        body{
+            background-color: rgb(169, 245, 220);
+            display: grid;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        main{
+            display: grid;
+            text-align: center;
+            padding:20px; 
+            width: 50%;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.5);
+            background: white;
+            border-radius:10px; 
+        }
+           input,button{
+            padding: 10px;
+            margin: 8px;
+            width: 90%;
+            box-shadow:0px 4px 20px rgba(0,0,0,0.2) ;
+            border-radius: 20px;
+         } 
+          button:hover{
+            color:rgb(185, 183, 183);
+            background-color: rgb(173, 171, 168);
+          
+          }
+    </style>
+    <script>
+    function login(event){
+        event.preventDefault();
+
+        let u = document.getElementById("user").value;
+        let p = document.getElementById("pass").value;
+
+        // Fetch all users from localStorage
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
+        // Check if a matching user exists
+        let match = users.find(user => user.username === u && user.password === p);
+
+        if(match){
+            document.getElementById("result").innerHTML = "Login Successful ✅";
+        } else {
+            document.getElementById("result").innerHTML = "Invalid Credentials ❌";
+        }
+    }
+</script>
+
+</body>
+</html>

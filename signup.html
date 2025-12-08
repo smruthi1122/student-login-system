@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+</head>
+<body>
+    <h1 align="justify">STUDENT SIGNUP</h1>
+
+    <main>
+        <form onsubmit="return signup(event)">
+            <input type="text" id="newUser" placeholder="Create Username" required>
+            <input type="password" id="newPass" placeholder="Create Password" required>
+            <button>SIGNUP</button>
+        </form>
+
+        <p id="status"></p>
+    </main>
+
+    <style>
+        body{
+            background-color: rgb(220, 247, 220);
+            display: grid;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        main{
+            width: 50%;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        input, button{
+            padding: 10px;
+            margin: 8px;
+            width: 90%;
+            border-radius: 20px;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+        }
+    </style>
+
+    <script>
+        function signup(event){
+            event.preventDefault();
+
+            let user = document.getElementById("newUser").value;
+            let pass = document.getElementById("newPass").value;
+
+            // read existing users OR create empty list
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            // check if username already exists
+            let exists = users.some(u => u.username === user);
+
+            if(exists){
+                document.getElementById("status").innerHTML = "Username already exists!";
+                return;
+            }
+
+            // push new user
+            users.push({username: user, password: pass});
+            localStorage.setItem("users", JSON.stringify(users));
+
+            document.getElementById("status").innerHTML = "Signup Successful! You can login now.";
+        }
+    </script>
+</body>
+</html>
