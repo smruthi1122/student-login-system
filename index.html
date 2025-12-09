@@ -50,26 +50,19 @@
           }
     </style>
     <script>
-    function login(event){
-        event.preventDefault();
+function validateLogin() {
+  const u = document.getElementById("user").value;
+  const p = document.getElementById("pass").value;
 
-        let u = document.getElementById("user").value;
-        let p = document.getElementById("pass").value;
-
-        // Fetch all users from localStorage
-        let users = JSON.parse(localStorage.getItem("users")) || [];
-
-        // Check if a matching user exists
-        let match = users.find(user => user.username === u && user.password === p);
-
-        if(match){
-            document.getElementById("result").innerHTML = "Login Successful ✅";
-        } else {
-            document.getElementById("result").innerHTML = "Invalid Credentials ❌";
-        }
-    }
+  if (u === "" || p === "") {
+    alert("Please enter username and password!");
+    return false;
+  }
+}
 </script>
+
 
 </body>
 </html>
+
 
