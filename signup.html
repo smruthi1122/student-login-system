@@ -3,44 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup Page</title>
+    <title>Student Signup</title>
 </head>
+
 <body>
-    <h1 align="justify">STUDENT SIGNUP</h1>
+    <h1 align="center">STUDENT SIGNUP PAGE</h1>
 
     <main>
         <form onsubmit="return signup(event)">
-            <input type="text" id="newUser" placeholder="Create Username" required>
-            <input type="password" id="newPass" placeholder="Create Password" required>
-            <button>SIGNUP</button>
-            <a href="index.html">Login</a>
-
+            <input id="newuser" type="text" placeholder="Create Username" required>
+            <input id="newpass" type="password" placeholder="Create Password" required>
+            <button type="submit">SIGNUP</button>
         </form>
 
-        <p id="status"></p>
+        <p id="response"></p>
+
+        <a href="index.html">Already have an account? Login</a>
     </main>
 
     <style>
         body{
-            background-color: rgb(220, 247, 220);
+            background-color: rgb(180, 240, 255);
             display: grid;
             justify-content: center;
-            margin-top: 40px;
+            margin-top: 50px;
+            font-family: Arial;
         }
         main{
-            width: 50%;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+            display: grid;
             text-align: center;
+            padding:20px; 
+            width: 50%;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.5);
+            background: white;
+            border-radius:10px; 
         }
-        input, button{
+        input,button{
             padding: 10px;
             margin: 8px;
             width: 90%;
+            box-shadow:0px 4px 20px rgba(0,0,0,0.2) ;
             border-radius: 20px;
-            box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+            border: 1px solid #aaa;
+        }
+        button:hover{
+            background-color: rgb(200, 200, 200);
         }
     </style>
 
@@ -48,27 +55,23 @@
         function signup(event){
             event.preventDefault();
 
-            let user = document.getElementById("newUser").value;
-            let pass = document.getElementById("newPass").value;
+            let u = document.getElementById('newuser').value;
+            let p = document.getElementById('newpass').value;
 
-            // read existing users OR create empty list
-            let users = JSON.parse(localStorage.getItem("users")) || [];
-
-            // check if username already exists
-            let exists = users.some(u => u.username === user);
-
-            if(exists){
-                document.getElementById("status").innerHTML = "Username already exists!";
-                return;
+            if(u.length < 3){
+                document.getElementById("response").innerHTML = "Username must be at least 3 characters!";
+                return false;
+            }
+            if(p.length < 4){
+                document.getElementById("response").innerHTML = "Password must be at least 4 characters!";
+                return false;
             }
 
-            // push new user
-            users.push({username: user, password: pass});
-            localStorage.setItem("users", JSON.stringify(users));
-
-            document.getElementById("status").innerHTML = "Signup Successful! You can login now.";
+            document.getElementById("response").innerHTML = "Signup Successful!";
         }
     </script>
+
 </body>
 </html>
+
 
